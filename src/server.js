@@ -22,23 +22,23 @@ router.get('/me', (req, res) => {
   res.send({ me: 'hi gavin' })
 })
 
-router.route('/cat')
-.get()//pass in controller and middleware
-.post()
-})
-router.route('/cat/:id')
-.get()
-.post()
-})
+router
+  .route('/cat')
+  .get()
+  .post()
+
+router
+  .route('/cat/:id')
+  .get()
+  .post()
 
 app.use('/api', router)
 //middleware to use router
 // app.post('/signup', signup)
 // app.post('/signin', signin)
-//
 // app.use('/api', protect)
 // app.use('/api/user', userRouter)
-// app.use('/api/item', itemRouter)
+app.use('/api/item', itemRouter)
 app.use('/api/list', listRouter)
 
 const log = (req, res, next) => {
