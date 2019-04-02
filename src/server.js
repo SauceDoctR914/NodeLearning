@@ -18,21 +18,23 @@ app.use(json())
 app.use(urlencoded({ extended: true }))
 app.use(morgan('dev'))
 
-app.post('/signup', signup)
-app.post('/signin', signin)
-
-app.use('/api', protect)
-app.use('/api/user', userRouter)
-app.use('/api/item', itemRouter)
+// app.post('/signup', signup)
+// app.post('/signin', signin)
+//
+// app.use('/api', protect)
+// app.use('/api/user', userRouter)
+// app.use('/api/item', itemRouter)
 app.use('/api/list', listRouter)
 
 const log = (req, res, next) => {
   console.log('logging')
+  req.mydata = 'hello'
   next()
 }
 app.get('/', (req, res) => {
-  res.send({ message: 'hello' })
+  res.send({ data: req.mydata })
 })
+
 app.post('/', (req, res) => {
   res.send({ message: 'ok' })
 })
@@ -42,7 +44,8 @@ app.get('/data', (req, res) => {
 })
 
 app.post('/data', (req, res) => {
-  res.send(req.body)
+  console.log(req.body)
+  res.send({ ok: true })
 })
 
 export const start = async () => {
