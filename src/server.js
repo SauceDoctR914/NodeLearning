@@ -26,11 +26,23 @@ app.use('/api/user', userRouter)
 app.use('/api/item', itemRouter)
 app.use('/api/list', listRouter)
 
+const log = (req, res, next) => {
+  console.log('logging')
+  next()
+}
 app.get('/', (req, res) => {
   res.send({ message: 'hello' })
 })
 app.post('/', (req, res) => {
   res.send({ message: 'ok' })
+})
+
+app.get('/data', (req, res) => {
+  res.send({ data: [1, 2, 3] })
+})
+
+app.post('/data', (req, res) => {
+  res.send(req.body)
 })
 
 export const start = async () => {
