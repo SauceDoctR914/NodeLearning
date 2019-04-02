@@ -26,13 +26,15 @@ app.use('/api/user', userRouter)
 app.use('/api/item', itemRouter)
 app.use('/api/list', listRouter)
 
+app.get('/', (req, res) => {
+  res.send({ message: 'hello' })
+})
+app.post('/', (req, res) => {
+  res.send({ message: 'ok' })
+})
+
 export const start = async () => {
-  try {
-    await connect()
-    app.listen(config.port, () => {
-      console.log(`REST API on http://localhost:${config.port}/api`)
-    })
-  } catch (e) {
-    console.error(e)
-  }
+  app.listen(3003, () => {
+    console.log('server is on 3003')
+  })
 }
