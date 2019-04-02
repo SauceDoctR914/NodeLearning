@@ -10,7 +10,7 @@ import itemRouter from './resources/item/item.router'
 import listRouter from './resources/list/list.router'
 
 export const app = express()
-
+const router = express.Router()
 app.disable('x-powered-by')
 
 app.use(cors())
@@ -18,6 +18,21 @@ app.use(json())
 app.use(urlencoded({ extended: true }))
 app.use(morgan('dev'))
 
+router.get('/me', (req, res) => {
+  res.send({ me: 'hi gavin' })
+})
+
+router.route('/cat')
+.get()//pass in controller and middleware
+.post()
+})
+router.route('/cat/:id')
+.get()
+.post()
+})
+
+app.use('/api', router)
+//middleware to use router
 // app.post('/signup', signup)
 // app.post('/signin', signin)
 //
@@ -48,7 +63,7 @@ app.post('/data', (req, res) => {
   res.send({ ok: true })
 })
 
-export const start = async () => {
+export const start = () => {
   app.listen(3003, () => {
     console.log('server is on 3003')
   })
