@@ -1,20 +1,15 @@
 import controllers from './item.controllers'
 import { Router } from 'express'
-const controller = (req, res) => {
-  res.send({ message: 'item routes' })
-}
+
 const router = Router()
 router
   .route('/')
-  .get(controller)
-  .post(controller)
-  .put(controller)
-  .delete(controller)
+  .get(controllers.getMany)
+  .post(controllers.createOne)
 router
   .route('/:id')
-  .get(controller)
-  .post(controller)
-  .put(controller)
-  .delete(controller)
+  .get(controllers.getOne)
+  .put(controllers.updateOne)
+  .delete(controllers.removeOne)
 
 export default router
