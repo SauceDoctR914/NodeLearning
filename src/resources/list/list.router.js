@@ -1,4 +1,3 @@
-import { Router } from 'express'
 import controllers from './list.controllers'
 import { Router } from 'express'
 

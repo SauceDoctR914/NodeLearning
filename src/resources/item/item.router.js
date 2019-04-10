@@ -1,8 +1,7 @@
-import { Router } from 'express'
 import controllers from './item.controllers'
 import { Router } from 'express'
 const controller = (req, res) => {
-  res.send({ message: 'item controller' })
+  res.send({ message: 'item routes' })
 }
 const router = Router()
 router

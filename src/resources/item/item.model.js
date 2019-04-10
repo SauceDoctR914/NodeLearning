@@ -3,16 +3,16 @@ import mongoose from 'mongoose'
 const itemSchema = new mongoose.Schema(
   {
     name: {
-      type: String,
+      maxlength: 50,
       required: true,
       trim: true,
-      maxlength: 50
+      type: String
     },
     status: {
-      type: String,
-      required: true,
+      default: 'active',
       enum: ['active', 'complete', 'pastdue'],
-      default: 'active'
+      required: true,
+      type: String
     },
     notes: String,
     due: Date,
@@ -29,7 +29,5 @@ const itemSchema = new mongoose.Schema(
   },
   { timestamps: true }
 )
-
 itemSchema.index({ list: 1, name: 1 }, { unique: true })
-
 export const Item = mongoose.model('item', itemSchema)
