@@ -16,10 +16,16 @@ const run = async () => {
       createdBy: mongoose.Types.ObjectId(),
       list: mongoose.Types.ObjectId()
     })
+    const updated = await Item.findByIdAndUpdate(
+      item._id,
+      { name: 'eat' },
+      { new: true }
+    ).exec()
     console.log(item, 'Hi')
   } catch (e) {
     console.error(e)
   }
 }
+
 run()
 // export default crudControllers(Item)
