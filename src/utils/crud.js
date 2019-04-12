@@ -7,7 +7,7 @@ export const getOne = model => async (req, res) => {
       })
       .lean()
       .exec()
-    if (!docs) {
+    if (!doc) {
       res.status(400).end()
     }
     res.status(200).json({ data: doc })
@@ -37,9 +37,6 @@ export const createOne = model => async (req, res) => {
       .create({ ...req.body, createdBy })
       .lean()
       .exec()
-    if (!doc) {
-      return res.status(400).end()
-    }
     res.status(200).json({ data: doc })
   } catch (e) {
     console.error(e)
@@ -47,7 +44,28 @@ export const createOne = model => async (req, res) => {
   }
 }
 
-export const updateOne = model => async (req, res) => {}
+export const updateOne = model => async (req, res) => {
+  try {
+    const updatedDoc = await model
+      .findOneAndUpdate(
+        {
+          createdBy: req.user._id,
+          _id: req.params.id
+        },
+        req.body,
+        { new: true }
+      )
+      .lean()
+      .exec()
+    if (!updatedDoc) {
+      return res.status(400).end()
+    }
+    res.status(200).json({ data: updatedDoc })
+  } catch (e) {
+    console.error(e)
+    res.status(400).end()
+  }
+}
 
 export const removeOne = model => async (req, res) => {}
 
