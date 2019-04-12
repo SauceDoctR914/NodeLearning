@@ -10,6 +10,7 @@ export const getOne = model => async (req, res) => {
     if (!doc) {
       return res.status(404).end()
     }
+
     res.status(200).json({ data: doc })
   } catch (e) {
     console.error(e)
@@ -65,7 +66,25 @@ export const updateOne = model => async (req, res) => {
   }
 }
 
-export const removeOne = model => async (req, res) => {}
+export const removeOne = model => async (req, res) => {
+  try {
+    const removed = await model
+      .findOneAndRemove(
+        { createdBy: req.user._id, _id: req.params.id },
+        req.body,
+        { new: true }
+      )
+      .lean()
+      .exec()
+    if (!removed) {
+      res.status(400).end()
+    }
+    res.status(200).json({ data: removed })
+  } catch (e) {
+    console.error(e)
+    res.status(400).end()
+  }
+}
 
 // export const createOne = model => async (req, res) => {
 //   const createdBy = req.user._id
