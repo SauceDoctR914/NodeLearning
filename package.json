@@ -16,11 +16,6 @@
     "start": "node dist/index.js"
   },
   "dependencies": {
-    "7": "^0.0.1",
-    "babel": "^6.23.0",
-    "babel-cli": "^6.26.0",
-    "babel-preset-env": "^1.7.0",
-    "babel-register": "^6.26.0",
     "bcrypt": "^3.0.2",
     "body-parser": "^1.18.3",
     "cors": "^2.8.5",
@@ -29,7 +24,7 @@
     "express": "^4.16.4",
     "jsonwebtoken": "^8.4.0",
     "lodash": "^4.17.11",
-    "mongoose": "^5.3.13",
+    "mongoose": "^5.5.1",
     "morgan": "^1.9.1",
     "validator": "^10.9.0"
   },
