@@ -22,9 +22,7 @@ export const getMany = model => async (req, res) => {
       .find({ createdBy: req.user._id })
       .lean()
       .exec()
-    if (!docs) {
-      res.status(400).end()
-    }
+
     res.status(200).json({ data: docs })
   } catch (e) {
     console.error(e)
@@ -32,7 +30,22 @@ export const getMany = model => async (req, res) => {
   }
 }
 
-export const createOne = model => async (req, res) => {}
+export const createOne = model => async (req, res) => {
+  const createdBy = req.user._id
+  try {
+    const doc = await model
+      .create({ ...req.body, createdBy })
+      .lean()
+      .exec()
+    if (!doc) {
+      return res.status(400).end()
+    }
+    res.status(200).json({ data: doc })
+  } catch (e) {
+    console.error(e)
+    res.status(400).end()
+  }
+}
 
 export const updateOne = model => async (req, res) => {}
 
